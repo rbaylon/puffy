@@ -1,0 +1,88 @@
+/* 
+# Copyright (c) 2015, Ricardo Baylon Jr.
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+#
+# 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+#
+# 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the 
+# documentation and/or other materials provided with the distribution.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, 
+# BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
+# SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS 
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+body {
+	background-color: #F5F5F0;
+  margin: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+#login{
+  position: relative;
+}
+
+#banner{
+	color: red;
+}
+
+#sidepane {
+	min-height: 1000px;
+  max-height: 100%;
+  background-color: #4747D1;
+  width: 20%;
+}
+#header{
+	height: 25px;
+  background-color: #3333CC;
+}
+#content{
+	position: absolute;
+  top: 25px;
+  left: 20%;
+	min-width: 78%;
+  padding: 1%;
+}
+#logout {
+	position: absolute;
+	top: 2px;
+	right: 10px;
+	color: white;	
+}
+
+#flash{
+	color: white;
+	position: relative;
+	left: 2px;
+	top: 2px;
+}
+
+#intform{
+	height: auto;
+}
+
+#fsubmit{
+	float: right;
+	width: 600px;
+}
+
+#alias{
+	position: relative;
+}
+.error{
+  color: red;
+}
+
+.success{
+	color: green;
+}
+
+.icon {
+	margin: 0px;
+	padding: 0px;
+}
