@@ -31,13 +31,13 @@ sub getIfs
 
 sub saveConfig {
   my ($self, $data, $file) = @_;
-  my $res = store($data, $file);
+  my $res = store($data, "config/$file");
   return $res;
 }
 
 sub getConfig {
 	my ($self, $file) = @_;
-  my $data = eval { retrieve($file) };
+  my $data = eval { retrieve("config/$file") };
 	if($@){
 		warn "$file not found!";
 	}

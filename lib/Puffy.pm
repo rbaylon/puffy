@@ -18,41 +18,22 @@
 package Puffy;
 use Mojo::Base 'Mojolicious';
 
-# Our model
-#use MyApp::Model::Utils;
-#use MyApp::Model::Users;
-
-# add config helper
-# plugin 'Config';
-
-# This method will run once at server start
 sub startup {
-  my $self = shift;
-	my $config = $self->plugin('Config');
-
+	my $self = shift;
+	my $config = $self->plugin(Config => {file => 'config/puffy.conf'});
 	$self->secrets(['Mojolicious rocks']);
 	my $name = $config->{name};
 	$self->log->debug("Welcome to $name.");
-	
-	# This will make our Utils module available via $self->utils
-#	$self->helper(utils => sub { state $utils = MyApp::Model::Utils->new });
-#	$self->helper(users => sub { state $users = MyApp::Model::Users->new });
-
-  # Documentation browser under "/perldoc"
-  $self->plugin('PODRenderer');
-
-  # Router
-  my $r = $self->routes;
-
-  # Normal route to controller
+	# Documentation browser under "/perldoc"
+	$self->plugin('PODRenderer');
+	# Router
+	my $r = $self->routes;
+	# Normal route to controller
 	$r->any('/login')->to('login#login');
-  
 	# access protected pages
 	my $logged_in = $r->under('/')->to('login#logged_in');
 	$logged_in->get('/')->to('example#welcome');
-  $logged_in->any('/interface')->to('interface#interface');
-
+	$logged_in->any('/interface')->to('interface#interface');
 	$r->get('/logout')->to('login#logout');
 }
-
 1;

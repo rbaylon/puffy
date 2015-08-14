@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 # Copyright (c) 2015, Ricardo Baylon Jr.
 # All rights reserved.
 #
@@ -15,23 +16,57 @@
 # INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
 # OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package Puffy::Model::Users;
 
 use strict;
 use warnings;
 use Crypt::SaltedHash;
-use Puffy::Model::Utils;
+use Storable;
+use Getopt::Long qw(GetOptions);
 
-sub new { bless {}, shift }
+my $new;
+my $modify;
+my $delete;
+my $validate;
+my $user;
+my $password;
+my $usage = qq{
+  usage:
+    $0 --new --user <username> --password <password>
+    or
+    $0 --modify --user <username> --password <password>
+    or
+    $0 --validate --user <username> --password <password>
+    or
+    $0 --delete --user <username>
+};
+GetOptions(
+	'new' => \$new,
+	'modify' => \$modify,
+	'user=s' => \$user,
+	'password=s' => \$password
+) or die $usage;
 
-sub check {
-  my ($self, $user, $pass) = @_;
-	my $utils = Puffy::Model::Utils->new();
-	my $users = $utils->getConfig("user.conf");
-  # Success
-	return 1 if exists $users->{$user} && Crypt::SaltedHash->validate($users->{$user}, $pass);
-	# Fail
-  return undef;
+my $usersFile = 'user.conf';
+
+sub new{
+	my ($user, $password) = @_;
+	my $userpw = {};
+	my $saltedpw = Crypt::SaltedHash->new(algorithm => 'SHA-512');
+	$saltedpw->add($password);
+	my $pw = $saltedpw->generate();
+	$userpw->{$user} = $pw;
+	print "User saved!\n" if saveUser($userpw, $usersFile);
 }
 
-1;
+sub saveUser {
+  my ($data, $file) = @_;
+  my $res = store($data, $file);
+  return $res;
+}
+
+if($new){
+	new($user, $password);
+} 
+else {
+	die $usage;
+}

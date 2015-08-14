@@ -1,3 +1,4 @@
+#!/usr/bin/perl
 # Copyright (c) 2015, Ricardo Baylon Jr.
 # All rights reserved.
 #
@@ -15,8 +16,8 @@
 # INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
 # OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#!/usr/bin/perl
-
+use strict;
+use warnings;
 use Storable;
 use Data::Dumper;
 use Getopt::Long qw(GetOptions);
@@ -24,6 +25,6 @@ use Getopt::Long qw(GetOptions);
 my $file;
 GetOptions('file=s' => \$file) or die "Usage: $0 --file FILE\n";
 
-%data = %{retrieve($file)};
+my %data = %{retrieve($file)};
 
 print Dumper \%data;
