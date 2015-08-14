@@ -21,7 +21,7 @@ use Mojo::Base 'Mojolicious';
 sub startup {
 	my $self = shift;
 	my $config = $self->plugin(Config => {file => 'config/puffy.conf'});
-	$self->secrets(['Mojolicious rocks']);
+	$self->secrets([$config->{secret}]);
 	my $name = $config->{name};
 	$self->log->debug("Welcome to $name.");
 	# Documentation browser under "/perldoc"
