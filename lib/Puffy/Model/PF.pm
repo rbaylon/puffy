@@ -25,40 +25,36 @@ my @ifs = $utils->getIfs();
 
 my $SYNTAX = {
 	"option" => {
-							"set" => { "timeout" => ["timeout","timeout-list"],
-											"ruleset-optimization" => ["none","basic","profile"],
-											"optimization" => ["default","normal","high-latency","satellite","aggressive","conservative"],
-											"limit" => ["limit-item","limit-list"],
-											"loginterface" => ["interface-name","none"],
-											"block-policy" => ["drop","return"],
-											"state-policy" => ["if-bound","floating"],
-											"state-defaults" => "state-opts",
-											"fingerprints" => "filename",
-											"skip on" => "ifspec",
-											"debug" => ["none","urgent","misc","loud"],
-											"reassemble" => ["yes","no","yes no-df","no no-df"]
-										}
-						},
+		"set" => { "timeout" => ["timeout","timeout-list"],
+			"ruleset-optimization" => ["none","basic","profile"],
+			"optimization" => ["default","normal","high-latency","satellite","aggressive","conservative"],
+			"limit" => ["limit-item","limit-list"],
+			"loginterface" => ["interface-name","none"],
+			"block-policy" => ["drop","return"],
+			"state-policy" => ["if-bound","floating"],
+			"state-defaults" => "state-opts",
+			"fingerprints" => "filename",
+			"skip on" => "ifspec",
+			"debug" => ["none","urgent","misc","loud"],
+			"reassemble" => ["yes","no","yes no-df","no no-df"]
+		}
+	},
 	"timeout" => { opt => [
-									"tcp.first","tcp.opening","tcp.established","tcp.closing","tcp.finwait","tcp.closed","udp.first","udp.single",
-                	"udp.multiple","icmp.first","icmp.error","other.first","other.single","other.multiple","frag","interval","src.track",
-                	"adaptive.start","adaptive.end"
-               		],
-							 	arg => "int" 
-							},
-							
-	"limit-item" => { opt => ["states","frags","src-nodes","tables","table-entries"],
-										arg => "int"
-									},
+		"tcp.first","tcp.opening","tcp.established","tcp.closing","tcp.finwait","tcp.closed","udp.first","udp.single",
+		"udp.multiple","icmp.first","icmp.error","other.first","other.single","other.multiple","frag","interval","src.track",
+		"adaptive.start","adaptive.end"
+		],
+		arg => "int"
+	},
+	"limit-item" => { opt => ["states","frags","src-nodes","tables","table-entries"],arg => "int"},
 	"interface-name" => \@ifs,
 	"state-opts" => "state-opt",
 	"state-opt" => [
-									{"max" => "int"},"no-sync","timeout","sloppy","pflow",{"source-track" => ["rule","global"]},{"max-src-nodes" => "int"},
-									{"max-src-states" => "int"},{"max-src-conn" => "int"},{"max-src-conn-rate" => "int/int"},{"overload" => ["< string >","flush","flush global"]},
-									"if-bound","floating"
-								],
+		{"max" => "int"},"no-sync","timeout","sloppy","pflow",{"source-track" => ["rule","global"]},{"max-src-nodes" => "int"},
+		{"max-src-states" => "int"},{"max-src-conn" => "int"},{"max-src-conn-rate" => "int/int"},{"overload" => ["< string >","flush","flush global"]},
+		"if-bound","floating"
+		],
 	"ifspec" => "interface-name",
-	
 };
 
 sub new { bless {}, shift }
