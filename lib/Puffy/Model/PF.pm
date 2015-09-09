@@ -25,36 +25,116 @@ my @ifs = $utils->getIfs();
 
 my $SYNTAX = {
 	"option" => {
-		"set" => { "timeout" => ["timeout","timeout-list"],
-			"ruleset-optimization" => ["none","basic","profile"],
-			"optimization" => ["default","normal","high-latency","satellite","aggressive","conservative"],
-			"limit" => ["limit-item","limit-list"],
-			"loginterface" => ["interface-name","none"],
-			"block-policy" => ["drop","return"],
-			"state-policy" => ["if-bound","floating"],
-			"state-defaults" => "state-opts",
-			"fingerprints" => "filename",
-			"skip on" => "ifspec",
-			"debug" => ["none","urgent","misc","loud"],
+		"set" => { 
+			"type" => "literal",
+			"timeout" => {
+				"type" => "literal",
+				"opt-type" => "key",
+				"opts" => ["timeout","timeout-list"],
+			},
+			"ruleset-optimization" => {
+				"type" => "literal",
+				"opt-type" => "select",
+				"opts" => ["none","basic","profile"]
+			},
+			"optimization" => {
+        "type" => "literal",
+        "opt-type" => "select",
+				"opts" => ["default","normal","high-latency","satellite","aggressive","conservative"]
+			},
+			"limit" => {
+        "type" => "literal",
+        "opt-type" => "key",
+				"opts" => ["limit-item","limit-list"]
+			},
+			"loginterface" => {
+				"type" => "literal",
+				"opt-type" => "select",
+				"opts" => ["interface-name","none"]
+			},
+			"block-policy" => {
+				type => "literal",
+				"opt-type" => "select",
+				opts => ["drop","return"]
+			},
+			"state-policy" => {
+        type => "literal",
+        "opt-type" => "select",
+				opts => ["if-bound","floating"]
+			},
+			"state-defaults" => {
+				type => "literal",
+				"opt-type" => "key",
+				opts => "state-opts"
+			},
+			"fingerprints" => {
+				type => "literal",
+				"opt-type" => "filename",
+				opts => "path-to-file"
+			},
+			"skip on" => {
+				type => "literal",
+				"opt-type" => "key",	
+				opts => "ifspec"
+			},
+			"debug" => {
+				type => "literal",
+				"opt-type" => "select",
+				opts => ["none","urgent","misc","loud"]
+			},
 			"reassemble" => ["yes","no","yes no-df","no no-df"]
 		}
 	},
-	"timeout" => { opt => [
+	"timeout" => { 
+		type => "key",
+		"opt-type" => "multi-select",
+		opts => [
 		"tcp.first","tcp.opening","tcp.established","tcp.closing","tcp.finwait","tcp.closed","udp.first","udp.single",
 		"udp.multiple","icmp.first","icmp.error","other.first","other.single","other.multiple","frag","interval","src.track",
 		"adaptive.start","adaptive.end"
 		],
 		arg => "int"
 	},
-	"limit-item" => { opt => ["states","frags","src-nodes","tables","table-entries"],arg => "int"},
-	"interface-name" => \@ifs,
-	"state-opts" => "state-opt",
-	"state-opt" => [
-		{"max" => "int"},"no-sync","timeout","sloppy","pflow",{"source-track" => ["rule","global"]},{"max-src-nodes" => "int"},
-		{"max-src-states" => "int"},{"max-src-conn" => "int"},{"max-src-conn-rate" => "int/int"},{"overload" => ["< string >","flush","flush global"]},
-		"if-bound","floating"
-		],
-	"ifspec" => "interface-name",
+	"limit-item" => {
+		type => "key",
+    "opt-type" => "multi-select",
+		opts => ["states","frags","src-nodes","tables","table-entries"],
+		arg => "int"
+	},
+	"interface-name" => {
+		type => "key",
+		"opt-type" => "select",
+		opts => \@ifs
+	},
+	"state-opts" => {
+		type => "key",
+		"opt-type" => "key-multi-select",
+		opts => "state-opt"
+	},
+	"state-opt" => {
+		type => "key",
+		"opt-type" => "multi-select",
+		opts => [
+			{"max" => { type => "literal", "opt-type" => "none", arg => "int" } },
+			"no-sync",
+			{ "timeout" => { type => "key" } },
+			"sloppy",
+			"pflow",
+			{"source-track" => { type => "literal", "opt-type" => "select", opts => ["rule","global"]} },
+			{"max-src-nodes" => { type => "literal", "opt-type" => "none", arg => "int" } },
+			{"max-src-states" => { type => "literal", "opt-type" => "none", arg => "int" } },
+			{"max-src-conn" => { type => "literal", "opt-type" => "none", arg => "int" } },
+			{"max-src-conn-rate" => { type => "literal", "opt-type" => "none", arg => "int/int" } },
+			{"overload" => { type => "literal-with-name", "opt-type" => "select", opts => ["flush","flush global"]} },
+			"if-bound",
+			"floating"
+			]
+		},
+	"ifspec" => {
+		type => "key",
+		"opt-type" => "key-multi-select-w-negate",
+		opts => "interface-name"
+	},
 };
 
 sub new { bless {}, shift }
