@@ -34,6 +34,9 @@ sub startup {
 	my $logged_in = $r->under('/')->to('login#logged_in');
 	$logged_in->get('/')->to('example#welcome');
 	$logged_in->any('/interface')->to('interface#interface');
+	$logged_in->any('/firewall')->to('firewall#firewall');
+	$logged_in->any('/firewall/options')->to('firewall#options');
+	$logged_in->any('/firewall/rules')->to('firewall#rules');
 	$r->get('/logout')->to('login#logout');
 }
 1;
