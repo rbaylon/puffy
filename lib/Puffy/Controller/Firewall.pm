@@ -19,7 +19,11 @@ package Puffy::Controller::Firewall;
 use Mojo::Base 'Mojolicious::Controller';
 use Puffy::Model::Validate;
 use Puffy::Model::Utils;
+use Puffy::Model::HTML;
 use Switch;
+
+my $fieldset = HTML->new('fieldset', id => 'fset');
+my $legend = HTML->new('legend');
 
 my $utils = Puffy::Model::Utils->new();
 my $validator = Puffy::Model::Validate->new();
@@ -32,7 +36,7 @@ sub firewall {
 
 sub rules {
 	my $self = shift;
-  $self->render(msg => 'Firewall Rules Page');
+  $self->render(msg => 'Firewall Rules Page', tags => {fieldset => $fieldset, legend => $legend});
 }
 
 sub options {
