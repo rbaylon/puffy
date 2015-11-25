@@ -30,13 +30,15 @@ sub new {
     $self->{attr} = {};
   }
   bless $self, $class;
+	$self->__initialize();
+	return $self;
 }
 
 sub open {
   my $self = shift;
   print "<$self->{name} ";
-  while (my ($key, $value) = each %$self->{attr}){
-    print "$key = $value "
+  while (my ($key, $value) = each %{$self->{attr}}){
+    print "$key=$value";
   }
   print ">\n";
 }
@@ -44,6 +46,16 @@ sub open {
 sub close {
   my $self = shift;
   print "</$self->{name}>\n";
+}
+
+sub __initialize {
+  my $self = shift;
+  my @attrs = ();
+  while (my ($key, $value) = each %{$self->{attr}}){
+    push @attrs, "$key=$value";
+  }
+  $self->{open} = "<$self->{name} "."@attrs".">";
+  $self->{close} = "</$self->{name}>";
 }
 
 1;

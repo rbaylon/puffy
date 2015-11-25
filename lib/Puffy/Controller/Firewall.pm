@@ -22,8 +22,8 @@ use Puffy::Model::Utils;
 use Puffy::Model::HTML;
 use Switch;
 
-my $fieldset = HTML->new('fieldset', id => 'fset');
-my $legend = HTML->new('legend');
+my $fieldset = Puffy::Model::HTML->new('fieldset', {id => 'fset'});
+my $legend = Puffy::Model::HTML->new('legend');
 
 my $utils = Puffy::Model::Utils->new();
 my $validator = Puffy::Model::Validate->new();
