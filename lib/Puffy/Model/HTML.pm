@@ -29,6 +29,7 @@ sub new {
   } else {
     $self->{attr} = {};
   }
+	return undef if $name eq 'input';
   bless $self, $class;
 	$self->__initialize();
 	return $self;

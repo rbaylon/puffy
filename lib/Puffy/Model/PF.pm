@@ -22,8 +22,23 @@ use strict;
 use warnings;
 
 my @ifs = $utils->getIfs();
+my @protos = $utils->getProtos();
+my @actions = ('pass', 'match', 'block drop', 'block return', 'block return-rst', 'block return-icmp', 'block return-icmp6');
+my @direction = ('in', 'out', 'any');
+my @af = ('inet', 'inet6');
+my @srctype = ('any', 'single host', 'host range', 'network', 'alias');
 
-sub new { bless {}, shift }
+sub new { 
+	my $class = shift;
+	my $self = {};
+	$self->{actions} = \@actions;
+	$self->{ifs} = \@ifs;
+	$self->{direction} = \@direction;
+	$self->{af} = \@af;
+	$self->{protos} = \@protos;
+	$self->{srctype} = \@srctype;
+	bless $self, $class;
+}
 
 1;
 

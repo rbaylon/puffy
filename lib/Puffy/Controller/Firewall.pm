@@ -20,10 +20,16 @@ use Mojo::Base 'Mojolicious::Controller';
 use Puffy::Model::Validate;
 use Puffy::Model::Utils;
 use Puffy::Model::HTML;
+use Puffy::Model::PF;
 use Switch;
 
+my $pf = Puffy::Model::PF->new();
 my $fieldset = Puffy::Model::HTML->new('fieldset', {id => 'fset'});
 my $legend = Puffy::Model::HTML->new('legend');
+my $pfform = Puffy::Model::HTML->new('form', {id => 'pfRuleForm', action => 'rules', method => 'POST'});
+my $formtable = Puffy::Model::HTML->new('table', {class => 'formtable'});
+my $formtr = Puffy::Model::HTML->new('tr', {class => 'formtr'});
+my $formtd = Puffy::Model::HTML->new('td', {class => 'formtd'});
 
 my $utils = Puffy::Model::Utils->new();
 my $validator = Puffy::Model::Validate->new();
@@ -36,7 +42,7 @@ sub firewall {
 
 sub rules {
 	my $self = shift;
-  $self->render(msg => 'Firewall Rules Page', tags => {fieldset => $fieldset, legend => $legend});
+  $self->render(msg => 'Firewall Rules', tags => {fieldset => $fieldset, legend => $legend, pfform => $pfform, formtable => $formtable, formtr => $formtr, formtd => $formtd}, pf => $pf);
 }
 
 sub options {

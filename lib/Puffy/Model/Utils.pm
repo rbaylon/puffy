@@ -29,6 +29,12 @@ sub getIfs
    return @ifs;
 }
 
+sub getProtos
+{
+   my @protos = split("\n", `cat /etc/protocols | awk '{print \$3}' | grep "^[A-Z]" | sort`);
+   return @protos;
+}
+
 sub saveConfig {
   my ($self, $data, $file) = @_;
   my $res = store($data, "config/$file");
