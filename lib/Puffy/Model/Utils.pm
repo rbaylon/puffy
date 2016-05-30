@@ -25,29 +25,29 @@ sub new { bless {}, shift }
 
 sub getIfs
 {
-   my @ifs = split("\n", `/sbin/pfctl -s Interface -v`);
-   return @ifs;
+	my @ifs = split("\n", `doas /sbin/pfctl -s Interface -v`);
+	return @ifs;
 }
 
 sub getProtos
 {
-   my @protos = split("\n", `cat /etc/protocols | awk '{print \$3}' | grep "^[A-Z]" | sort`);
-   return @protos;
+	my @protos = split("\n", `cat /etc/protocols | awk '{print \$3}' | grep "^[A-Z]" | sort`);
+	return @protos;
 }
 
 sub saveConfig {
-  my ($self, $data, $file) = @_;
-  my $res = store($data, "config/$file");
-  return $res;
+	my ($self, $data, $file) = @_;
+	my $res = store($data, "config/$file");
+	return $res;
 }
 
 sub getConfig {
 	my ($self, $file) = @_;
-  my $data = eval { retrieve("config/$file") };
+	my $data = eval { retrieve("config/$file") };
 	if($@){
 		warn "$file not found!";
 	}
-  return $data;
+	return $data;
 }
 
 sub getMedia{

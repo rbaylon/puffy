@@ -35,8 +35,8 @@
 				% }
 			% }
     </div>
-    <div id=sidepane>
-    </div>
+    <!-- <div id=sidepane>
+    </div> -->
     <div id=content>
       <%= content %>
     </div>

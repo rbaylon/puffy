@@ -19,12 +19,12 @@
 
 body {
 	background-color: #F5F5F0;
-  margin: 0px;
+	margin: 0px;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
 #login{
-  position: relative;
+	position: relative;
 }
 
 #banner{
@@ -33,20 +33,19 @@ body {
 
 #sidepane {
 	min-height: 1000px;
-  max-height: 100%;
-  background-color: #4747D1;
-  width: 20%;
+	max-height: 100%;
+	background-color: #4747D1;
+	width: 20%;
 }
 #header{
 	height: 25px;
-  background-color: #3333CC;
+	background-color: #3333CC;
 }
 #content{
 	position: absolute;
-  top: 25px;
-  left: 20%;
+	top: 25px;
 	min-width: 78%;
-  padding: 1%;
+	padding: 1%;
 }
 #logout {
 	position: absolute;
@@ -75,7 +74,7 @@ body {
 	position: relative;
 }
 .error{
-  color: red;
+	color: red;
 }
 
 .success{
