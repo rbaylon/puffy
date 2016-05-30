@@ -46,7 +46,7 @@ GetOptions(
 	'password=s' => \$password
 ) or die $usage;
 
-my $usersFile = 'user.conf';
+my $usersFile = '../config/user.conf';
 
 sub new{
 	my ($user, $password) = @_;
@@ -56,6 +56,7 @@ sub new{
 	my $pw = $saltedpw->generate();
 	$userpw->{$user} = $pw;
 	print "User saved!\n" if saveUser($userpw, $usersFile);
+	
 }
 
 sub saveUser {
