@@ -42,10 +42,9 @@ body {
 	background-color: #3333CC;
 }
 #content{
-	position: absolute;
 	top: 25px;
 	min-width: 78%;
-	padding: 1%;
+	padding: 10%;
 }
 #logout {
 	position: absolute;

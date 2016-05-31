@@ -29,11 +29,11 @@ sub interface {
   my $self = shift;
   ## Utils subroutine
   my @ifs = $utils->getIfs();
-	$self->stash(ifs => \@ifs);
+  $self->stash(ifs => \@ifs);
   my $if = $self->param('if');
   my $page = 'Interface';
-	my @media = ();
-	my $localmsg = "Configuration successfully saved!";
+  my @media = ();
+  my $localmsg = "Configuration successfully saved!";
 	
   if($self->req->method eq 'POST'){
 		my $testnet =  qq{
@@ -47,6 +47,8 @@ sub interface {
 		my $ok = 1;
 		my $cf;
 		if($self->param('config_type') eq 'Static'){
+            my $ip4_addr = 1;
+            my $ip6_addr = 1;
 			$cf = {
 				config_type => $self->param('config_type'),
 				description => $self->param('description'),
@@ -68,20 +70,28 @@ sub interface {
 								last;
 							}
 						} else {
-							$localmsg = "$value is not a valid IPv4 address!";	
-							$ok = 0;
-							$flashmode = 'error';
-							last;
+                            if($value){
+                                $localmsg = "$value is not a valid IPv4 address!";	
+                                $ok = 0;
+                                $flashmode = 'error';
+                                last;
+                            } else {
+                                $ip4_addr = 0;
+                            }
 						}
 					}
 					case 'inet6' {
 						if($validator->is_ipv6($value)){
 							next;
 						} else {
-              $localmsg = "$value is not a valid IPv6 address!";
-              $ok = 0;
-              $flashmode = 'error';
-              last;
+                            if($value){
+                                $localmsg = "$value is not a valid IPv6 address!";
+                                $ok = 0;
+                                $flashmode = 'error';
+                                last;
+                            } else {
+                                $ip6_addr = 0;
+                            }
 						}
 					}
 					case 'alias' {
@@ -89,58 +99,64 @@ sub interface {
 						my $next = 0;
 						for my $ip(@{$value}){
 							next unless $ip;
-            	if($validator->is_ipv4($ip)){
-              	if($validator->is_testnet_ipv4($ip)){
-                	$localmsg = "($ip) $testnet";
-                	$ok = 0;
-                	$flashmode = 'error';
+                            if($validator->is_ipv4($ip)){
+                                if($validator->is_testnet_ipv4($ip)){
+                                    $localmsg = "($ip) $testnet";
+                                    $ok = 0;
+                                    $flashmode = 'error';
 									$last = 1;
-                	last;
-              	} else {
+                                    last;
+                                } else {
 									next;
 								}
-            	} elsif($validator->is_ipv6($ip)){
-                next;
+                            } elsif($validator->is_ipv6($ip)){
+                                next;
 							} else {
-              	$localmsg = "$ip is not a valid IPv4 or IPv6 alias!";
-              	$ok = 0;
-              	$flashmode = 'error';
+                                $localmsg = "$ip is not a valid IPv4 or IPv6 alias!";
+                                $ok = 0;
+                                $flashmode = 'error';
 								$last = 1;
-              	last;
-            	}
+                                last;
+                            }
 						}
 						last if $last;
 					}
 					case 'description' {
 						if($validator->is_descr($value)){
 							next;
-						}	else {
-              $localmsg = "\"$value\" should be less than 51 characters!";
-              $ok = 0;
-              $flashmode = 'error';
-              last;						
+						} else {
+                            $localmsg = "\"$value\" should be less than 51 characters!";
+                            $ok = 0;
+                            $flashmode = 'error';
+                            last;						
 						}				
 					}
 				}
 			}
+            if(!($ip4_addr || $ip6_addr)){
+                $localmsg = "Enter a valid IPv4 or IPv6 address!";
+                $ok = 0;
+                $flashmode = 'error';
+            }
 		}
 		else {
 			my @alias = ('');
-      $cf = {
-        config_type => $self->param('config_type'),
-        description => $self->param('description'),
-        inet => '',
-        netmask => 24,
-        inet6 => '',
-        prefix => 64,
-        media => $self->param('media'),
-        alias => \@alias
-      };
-      if(!$validator->is_descr($self->param('description'))){
-        $localmsg = $self->param('description')." should be less than 51 characters!";
-        $ok = 0;
-        $flashmode = 'error';
-      }
+            $cf = {
+                config_type => $self->param('config_type'),
+                description => $self->param('description'),
+                inet => '',
+                netmask => 24,
+                inet6 => '',
+                prefix => 64,
+                media => $self->param('media'),
+                alias => \@alias
+            };
+            
+            if(!$validator->is_descr($self->param('description'))){
+                $localmsg = $self->param('description')." should be less than 51 characters!";
+                $ok = 0;
+                $flashmode = 'error';
+            }
 		}
 		if($ok){
 			$utils->saveConfig($cf, "hostname.$if");
@@ -156,11 +172,11 @@ sub interface {
 	 		$self->stash(if => $if);
 			$self->stash(c => $config);
 			$self->stash(media => \@media);
-	  } else {
-	   	$self->stash(if => '');
+        } else {
+            $self->stash(if => '');
 			$self->stash(media => \@media);
 			$page = $page."s";
-	  }
+        }
 		$self->render(msg => $page);
 	}	
 }
