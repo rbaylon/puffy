@@ -26,6 +26,7 @@ sub new { bless {}, shift }
 sub getIfs
 {
 	my @ifs = split("\n", `doas /sbin/pfctl -s Interface -v`);
+    push(@ifs, 'rdomain');
 	return @ifs;
 }
 

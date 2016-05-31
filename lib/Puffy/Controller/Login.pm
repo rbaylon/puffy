@@ -23,15 +23,16 @@ my $users = Puffy::Model::Users->new();
 
 sub login {
   my $self = shift;
+  if($self->req->method eq 'POST'){
+      my $user = $self->param('username') || '';
+      my $pass = $self->param('password') || '';
+      $self->flash(message => 'Invalid username or password!');
+      return $self->render unless $users->check($user, $pass);
 
-  my $user = $self->param('username') || '';
-  my $pass = $self->param('password') || '';
-	$self->flash(message => 'Invalid username or password!');
-  return $self->render unless $users->check($user, $pass);
-
-  $self->session(user => $user);
-  $self->flash(message => 'Thanks for logging in.');
-  $self->redirect_to('/');
+      $self->session(user => $user);
+      $self->flash(message => 'Thanks for logging in.');
+      $self->redirect_to('/');
+  }
 }
 
 sub logged_in {

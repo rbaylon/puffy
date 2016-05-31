@@ -22,11 +22,12 @@ use strict;
 use warnings;
 
 my @ifs = $utils->getIfs();
-my @protos = $utils->getProtos();
 my @actions = ('pass', 'match', 'block drop', 'block return', 'block return-rst', 'block return-icmp', 'block return-icmp6');
 my @direction = ('in', 'out', 'any');
-my @af = ('inet', 'inet6');
+my @af = ('inet', 'inet6', 'any');
 my @srctype = ('any', 'single host', 'host range', 'network', 'alias');
+my @dsttype = @srctype;
+my @protos = ('TCP','UDP','ICMP','IP-ENCAP','GRE','IPSEC-AH','IPSEC-ESP','IPV6-ICMP','OSPFIGP','ETHERIP','CARP','L2TP','PFSYNC','other','any');
 
 sub new { 
 	my $class = shift;
@@ -37,6 +38,7 @@ sub new {
 	$self->{af} = \@af;
 	$self->{protos} = \@protos;
 	$self->{srctype} = \@srctype;
+    $self->{dsttype} = \@dsttype;
 	bless $self, $class;
 }
 
