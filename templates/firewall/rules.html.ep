@@ -24,9 +24,9 @@
 	<%== $tags->{pfform}->{open} %>
 		<%== $tags->{formtable}->{open} %>
 			<%== $tags->{formtr}->{open} %>
-				<%== $tags->{formtd}->{open} %>
+				<%== $tags->{tdDesc}->{open} %>
 					<%= label_for action => 'Action' %>
-				<%== $tags->{formtd}->{close} %>
+				<%== $tags->{tdDesc}->{close} %>
 				<%== $tags->{formtd}->{open} %>
 					<select id='action' name='action'>
 						% for my $a(@{$pf->{actions}}) {
@@ -37,9 +37,9 @@
 				<%== $tags->{formtd}->{close} %>
 			<%== $tags->{formtr}->{close} %>
       <%== $tags->{formtr}->{open} %>
-        <%== $tags->{formtd}->{open} %>
+        <%== $tags->{tdDesc}->{open} %>
           <%= label_for direction => 'Direction' %>
-        <%== $tags->{formtd}->{close} %>
+        <%== $tags->{tdDesc}->{close} %>
         <%== $tags->{formtd}->{open} %>
           <select id='direction' name='direction'>
           % for my $d(@{$pf->{direction}}) {
@@ -50,25 +50,25 @@
         <%== $tags->{formtd}->{close} %>
       <%== $tags->{formtr}->{close} %>
       <%== $tags->{formtr}->{open} %>
-        <%== $tags->{formtd}->{open} %>
+        <%== $tags->{tdDesc}->{open} %>
             <%= label_for log => 'Log' %>
-        <%== $tags->{formtd}->{close} %>
+        <%== $tags->{tdDesc}->{close} %>
         <%== $tags->{formtd}->{open} %>
             <%= check_box log => 1, checked => undef, id => 'log' %>
         <%== $tags->{formtd}->{close} %>
       <%== $tags->{formtr}->{close} %>
       <%== $tags->{formtr}->{open} %>
-        <%== $tags->{formtd}->{open} %>
+        <%== $tags->{tdDesc}->{open} %>
             <%= label_for quick => 'Quick' %>
-        <%== $tags->{formtd}->{close} %>
+        <%== $tags->{tdDesc}->{close} %>
         <%== $tags->{formtd}->{open} %>
             %= check_box quick => 1, checked => undef, id => 'quick'
         <%== $tags->{formtd}->{close} %>
       <%== $tags->{formtr}->{close} %>
       <%== $tags->{formtr}->{open} %>
-        <%== $tags->{formtd}->{open} %>
+        <%== $tags->{tdDesc}->{open} %>
           <%= label_for ifsrdomain => 'Interface or rdomain' %>
-        <%== $tags->{formtd}->{close} %>
+        <%== $tags->{tdDesc}->{close} %>
         <%== $tags->{formtd}->{open} %>
           <select id='ifsrdomain' name='ifsrdomain'>
           % for my $if(@{$pf->{ifs}}) {
@@ -79,7 +79,7 @@
         <%== $tags->{formtd}->{close} %>
       <%== $tags->{formtr}->{close} %>
       <%== $tags->{formtr}->{open} %>
-        <%== $tags->{formtd}->{open} %>
+        <%== $tags->{tdDesc}->{open} %>
           <%= label_for af => 'Address Family' %>
         <%== $tags->{formtd}->{close} %>
         <%== $tags->{formtd}->{open} %>
@@ -92,9 +92,9 @@
         <%== $tags->{formtd}->{close} %>
       <%== $tags->{formtr}->{close} %>
       <%== $tags->{formtr}->{open} %>
-        <%== $tags->{formtd}->{open} %>
+        <%== $tags->{tdDesc}->{open} %>
           <%= label_for protos => 'Protocol' %>
-        <%== $tags->{formtd}->{close} %>
+        <%== $tags->{tdDesc}->{close} %>
         <%== $tags->{formtd}->{open} %>
           <select id='protos' name='protos'>
           % for my $proto(@{$pf->{protos}}) {
@@ -105,13 +105,13 @@
         <%== $tags->{formtd}->{close} %>
       <%== $tags->{formtr}->{close} %>
       <%== $tags->{formtr}->{open} %>
-        <%== $tags->{formtd}->{open} %>
+        <%== $tags->{tdDesc}->{open} %>
           <%= label_for src => 'Source' %>
-        <%== $tags->{formtd}->{close} %>
+        <%== $tags->{tdDesc}->{close} %>
         <%== $tags->{formtd}->{open} %>
             <%== $tags->{formtable}->{open} %>
                 <%== $tags->{formtr}->{open} %>
-                    <%== $tags->{formtd}->{open} %>
+                    <%== $tags->{tdDescSub}->{open} %>
                         <%= label_for srctype => 'Type' %>
                         <select id='srctype' name='srctype'>
                             % for my $srctype(@{$pf->{srctype}}) {
@@ -119,7 +119,7 @@
                             ><%= $srctype %></option>
                             % }
                         </select>
-                    <%== $tags->{formtd}->{close} %>
+                    <%== $tags->{tdDescSub}->{close} %>
                     <%== $tags->{formtd}->{open} %>
                     <%== $tags->{formtd}->{close} %>
                     <%== $tags->{formtr}->{close} %>
@@ -142,13 +142,13 @@
       <%== $tags->{formtr}->{close} %>
       
       <%== $tags->{formtr}->{open} %>
-        <%== $tags->{formtd}->{open} %>
+        <%== $tags->{tdDesc}->{open} %>
           <%= label_for dst => 'Destination' %>
         <%== $tags->{formtd}->{close} %>
         <%== $tags->{formtd}->{open} %>
             <%== $tags->{formtable}->{open} %>
                 <%== $tags->{formtr}->{open} %>
-                    <%== $tags->{formtd}->{open} %>
+                    <%== $tags->{tdDescSub}->{open} %>
                         <%= label_for dsttype => 'Type' %>
                         <select id='dsttype' name='dsttype'>
                             % for my $dsttype(@{$pf->{dsttype}}) {
@@ -156,7 +156,7 @@
                             ><%= $dsttype %></option>
                             % }
                         </select>
-                    <%== $tags->{formtd}->{close} %>
+                    <%== $tags->{tdDescSub}->{close} %>
                     <%== $tags->{formtd}->{open} %>
                     <%== $tags->{formtd}->{close} %>
                     <%== $tags->{formtr}->{close} %>

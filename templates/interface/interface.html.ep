@@ -26,7 +26,7 @@
 	<legend><h2><%= "$msg: $if" %></h2></legend>
 	<table>
     <tr>
-      <td><%= label_for config_type => 'Configuration' %></td>
+      <td class=tdDesc ><%= label_for config_type => 'Configuration' %></td>
       <td>
         <select id='config_type' name='config_type' onchange="disableClass('inputs');">
           % for my $opt(qw(Static DHCP)){
@@ -40,16 +40,13 @@
       </td>
     </tr>
     <tr>
-      <td><%= label_for description => 'Description' %></td>
+      <td class=tdDesc ><%= label_for description => 'Description' %></td>
       <td><%= text_field 'description' => $c->{description} , id => 'description' %></td>
-      <td/>
-      <td/>
     </tr>
     <tr>
-      <td><%= label_for inet => 'IPv4 Address' %></td>
-      <td><%= text_field 'inet' => $c->{inet} , id => 'inet' , class => 'inputs' %></td>
-      <td><%= label_for netmask => 'Netmask' %></td>
-      <td>
+      <td class=tdDesc ><%= label_for inet => 'IPv4 Address' %></td>
+      <td><%= text_field 'inet' => $c->{inet} , id => 'inet' , class => 'inputs' %>
+		<%= label_for netmask => 'Netmask' %>
          <select id='netmask' class='inputs' name='netmask'>
           % for my $i(1..32) {
             <option value="<%= $i %>"
@@ -62,10 +59,9 @@
       </td>
     </tr>
     <tr>
-      <td><%= label_for inet6 => 'IPv6 Address' %></td>
-      <td><%= text_field 'inet6' => $c->{inet6} , id => 'inet6' , class => 'inputs' %></td>
-      <td><%= label_for prefix => 'Prefix Length' %></td>
-      <td>
+      <td class=tdDesc ><%= label_for inet6 => 'IPv6 Address' %></td>
+      <td><%= text_field 'inet6' => $c->{inet6} , id => 'inet6' , class => 'inputs' %>
+		<%= label_for prefix => 'Prefix Length' %>
          <select id='prefix' class='inputs' name='prefix'>
           % for my $j(1..128) {
             <option value="<%= $j %>"
@@ -78,13 +74,11 @@
       </td>
     </tr>
     <tr>
-      <td>Interface Group</td>
+      <td class=tdDesc >Interface Group</td>
       <td>Replace with checkbox</td>
-      <td/>
-      <td/>
     </tr>
     <tr>
-      <td><%= label_for media => 'Media Type' %></td>
+      <td class=tdDesc ><%= label_for media => 'Media Type' %></td>
       <td>
          <select id='media' name='media'>
           % for my $m(@$media) {
@@ -96,8 +90,6 @@
           % }
         </select>
       </td>
-      <td/>
-      <td/>
     </tr>
 	</table>
 	</fieldset>

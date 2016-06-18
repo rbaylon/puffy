@@ -39,7 +39,7 @@ body {
 }
 #header{
 	height: 25px;
-	background-color: #3333CC;
+	background-color: #4CAF50;
 }
 #content{
 	top: 25px;
@@ -50,7 +50,12 @@ body {
 	position: absolute;
 	top: 2px;
 	right: 10px;
-	color: white;	
+	color: white;
+}
+
+a{
+	text-decoration: none;
+	color: white;
 }
 
 #flash{
@@ -83,4 +88,24 @@ body {
 .icon {
 	margin: 0px;
 	padding: 0px;
+}
+
+table, th, td {
+   border: 1px solid white;
+   border-collapse: collapse;
+   padding: 15px;
+   text-align: left;
+}
+
+table{
+   width: 100%;
+}
+
+#fset{
+	padding: 20px;
+}
+
+.tdDesc{
+	background-color: #4CAF50;
+	color: white;
 }

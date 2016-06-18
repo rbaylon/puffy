@@ -25,7 +25,8 @@ sub new { bless {}, shift }
 
 sub getIfs
 {
-	my @ifs = split("\n", `doas /sbin/pfctl -s Interface -v`);
+	#my @ifs = split("\n", `doas /sbin/pfctl -s Interface -v`); #only available in 5.8 and later
+	my @ifs = split("\n", `/sbin/pfctl -s Interface -v | grep -v "lo"`);
     push(@ifs, 'rdomain');
 	return @ifs;
 }
