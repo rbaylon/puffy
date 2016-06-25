@@ -120,14 +120,10 @@
                             % }
                         </select>
                     <%== $tags->{tdDescSub}->{close} %>
-                    <%== $tags->{formtd}->{open} %>
-                    <%== $tags->{formtd}->{close} %>
                     <%== $tags->{formtr}->{close} %>
                     <%== $tags->{formtr}->{open} %>
                     <%== $tags->{formtd}->{open} %>
                         <%= text_field 'src' => 'replace value from config' , id => 'src' %>
-                    <%== $tags->{formtd}->{close} %>
-                    <%== $tags->{formtd}->{open} %>
                     /
                         <select id='prefix' class='inputs' name='prefix'>
                         % for my $j(1..128) {
@@ -157,14 +153,10 @@
                             % }
                         </select>
                     <%== $tags->{tdDescSub}->{close} %>
-                    <%== $tags->{formtd}->{open} %>
-                    <%== $tags->{formtd}->{close} %>
                     <%== $tags->{formtr}->{close} %>
                     <%== $tags->{formtr}->{open} %>
                     <%== $tags->{formtd}->{open} %>
                         <%= text_field 'dst' => 'replace value from config' , id => 'dst' %>
-                    <%== $tags->{formtd}->{close} %>
-                    <%== $tags->{formtd}->{open} %>
                     /
                         <select id='prefix' class='inputs' name='prefix'>
                         % for my $j(1..128) {

@@ -94,7 +94,7 @@
 	</table>
 	</fieldset>
 	<br>
-	<div>IP Alias (Virtual IP)</div>
+	<div id=divAlias class=tdDesc >IP Alias (Virtual IP)</div>
 	<div id=alias>
 		<%= text_field 'alias' => @{$c->{alias}}[0] , id => 'alias0' , class => 'inputs' %>	
 		<img id='plusicon' class='inputs' src="/img/icons/ic_add_box_black_24dp_2x.png" alt="Add IP alias" height="16" width="16" onclick="addInput('intform','div','alias','text');" onload="disableClass('inputs')" />

@@ -44,7 +44,7 @@ body {
 #content{
 	top: 25px;
 	min-width: 78%;
-	padding: 10%;
+	padding: 5%;
 }
 #logout {
 	position: absolute;
@@ -108,4 +108,10 @@ table{
 .tdDesc{
 	background-color: #4CAF50;
 	color: white;
+	width: 20%;
+}
+
+#divAlias{
+	color: white;
+	padding: 10px;
 }
