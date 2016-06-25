@@ -133,6 +133,23 @@
                         </select>
                     <%== $tags->{formtd}->{close} %>
                 <%== $tags->{formtr}->{close} %>
+				<%== $tags->{formtr}->{open} %>
+					<%== $tags->{tdDescSub}->{open} %>
+						<%= label_for srcport => 'Port' %>
+						<%= text_field 'srcport' , id => 'srcport', size => 12 %>
+					<%== $tags->{tdDescSub}->{close} %>
+				<%== $tags->{formtr}->{close} %>
+				<%== $tags->{formtr}->{open} %>
+					<%== $tags->{tdDescSub}->{open} %>
+						<%= label_for srcos => 'OS' %>
+                        <select id='srcos' class='inputs' name='srcos'>
+                        % for my $os(@{$pf->{os}}) {
+                            <option value="<%= $os %>"
+                            ><%= $os %></option>
+                        % }
+                        </select>
+					<%== $tags->{tdDescSub}->{close} %>
+				<%== $tags->{formtr}->{close} %>
             <%== $tags->{formtable}->{close} %>
         <%== $tags->{formtd}->{close} %>
       <%== $tags->{formtr}->{close} %>
@@ -166,6 +183,12 @@
                         </select>
                     <%== $tags->{formtd}->{close} %>
                 <%== $tags->{formtr}->{close} %>
+				<%== $tags->{formtr}->{open} %>
+					<%== $tags->{tdDescSub}->{open} %>
+						<%= label_for dstport => 'Port' %>
+						<%= text_field 'dstport' , id => 'dstport', size => 12 %>
+					<%== $tags->{tdDescSub}->{close} %>
+				<%== $tags->{formtr}->{close} %>
             <%== $tags->{formtable}->{close} %>
         <%== $tags->{formtd}->{close} %>
       <%== $tags->{formtr}->{close} %>

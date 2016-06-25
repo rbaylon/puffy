@@ -22,12 +22,13 @@ use strict;
 use warnings;
 
 my @ifs = $utils->getIfs();
-my @actions = ('pass', 'match', 'block drop', 'block return', 'block return-rst', 'block return-icmp', 'block return-icmp6');
-my @direction = ('in', 'out', 'any');
-my @af = ('inet', 'inet6', 'any');
-my @srctype = ('any', 'single host', 'host range', 'network', 'alias');
+my @actions = ('PASS', 'MATCH', 'BLOCK', 'BLOCK RETURN', 'BLOCK RETURN-RST', 'BLOCK RETURN-ICMP', 'BLOCK RETURN-ICMP6');
+my @direction = ('ANY','IN', 'OUT');
+my @af = ('ANY','INET', 'INET6');
+my @srctype = ('Any', 'Single Host', 'Host Range', 'Network Block', 'Macro', 'Interface', 'No Route', 'Route', 'Self', 'Table','Urpf-failed','Hostname');
 my @dsttype = @srctype;
-my @protos = ('TCP','UDP','ICMP','IP-ENCAP','GRE','IPSEC-AH','IPSEC-ESP','IPV6-ICMP','OSPFIGP','ETHERIP','CARP','L2TP','PFSYNC','other','any');
+my @protos = ('ANY','TCP','UDP','ICMP','IP-ENCAP','GRE','IPSEC-AH','IPSEC-ESP','IPV6-ICMP','OSPFIGP','ETHERIP','CARP','L2TP','PFSYNC','OTHER');
+my @os = $utils->getOS();
 
 sub new { 
 	my $class = shift;
@@ -39,6 +40,7 @@ sub new {
 	$self->{protos} = \@protos;
 	$self->{srctype} = \@srctype;
     $self->{dsttype} = \@dsttype;
+	$self->{os} = \@os;
 	bless $self, $class;
 }
 

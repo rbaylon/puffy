@@ -23,14 +23,13 @@ var interface_ids = ['inet','netmask','inet6','prefix','alias'];
 function addInput(parentId,elemName,varName,inputType){
 	if (counter == limit)  {
 		alert("You have reached the limit of adding " + counter + " addresses");
-  }
-  else {
+	} else {
 		var newelem = document.createElement(elemName);
 		newelem.id = counter;
-    newelem.innerHTML = "<"+ elemName +" class='dynElem' ><input id='alias"+counter+"' class='inputs' type='"+ inputType +"' name='"+varName+"' ><img class='icon' src='/img/icons/ic_clear_black_24dp_2x.png' alt='Remove' height='16' width='16' onclick='delElem("+counter+");'></"+elemName+">";
-    document.getElementById(parentId).appendChild(newelem);
-    counter++;
-  }
+		newelem.innerHTML = "<"+ elemName +" class='dynElem' ><input id='alias"+counter+"' class='inputs' type='"+ inputType +"' name='"+varName+"' ><img class='icon' src='/img/icons/ic_clear_black_24dp_2x.png' alt='Remove' height='16' width='16' onclick='delElem("+counter+");'></"+elemName+">";
+		document.getElementById(parentId).appendChild(newelem);
+		counter++;
+	}
 }
 
 function delElem(id){

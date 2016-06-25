@@ -27,7 +27,9 @@ sub getIfs
 {
 	#my @ifs = split("\n", `doas /sbin/pfctl -s Interface -v`); #only available in 5.8 and later
 	my @ifs = split("\n", `/sbin/pfctl -s Interface -v | grep -v "lo"`);
+	my $all = shift @ifs; #remove all and replace with 'any' below
     push(@ifs, 'rdomain');
+	unshift(@ifs, 'ANY');
 	return @ifs;
 }
 
@@ -37,7 +39,14 @@ sub getProtos
 	return @protos;
 }
 
-sub saveConfig {
+sub getOS
+{
+	my @os = split("\n",`/sbin/pfctl -s osfp | grep -v '-' | awk '{print \$1}' | sort -u`);
+	unshift(@os, 'ANY');
+	return @os;
+}
+sub saveConfig 
+{
 	my ($self, $data, $file) = @_;
 	my $res = store($data, "config/$file");
 	return $res;

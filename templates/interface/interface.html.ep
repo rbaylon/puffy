@@ -92,12 +92,12 @@
       </td>
     </tr>
 	</table>
-	</fieldset>
+	<hr>
 	<br>
-	<div id=divAlias class=tdDesc >IP Alias (Virtual IP)</div>
+	<div id=divAlias class=tdDesc >IP Alias (Virtual IPv4 or IPv6)</div>
+	<p id=addLabel>Click <img id='plusicon' class='inputs' src="/img/icons/ic_add_box_black_24dp_2x.png" alt="Add IP alias" height="16" width="16" onclick="addInput('intform','div','alias','text');" onload="disableClass('inputs')" /> to add</p>
 	<div id=alias>
 		<%= text_field 'alias' => @{$c->{alias}}[0] , id => 'alias0' , class => 'inputs' %>	
-		<img id='plusicon' class='inputs' src="/img/icons/ic_add_box_black_24dp_2x.png" alt="Add IP alias" height="16" width="16" onclick="addInput('intform','div','alias','text');" onload="disableClass('inputs')" />
 	<% my $i = 1000; =%>
 	% for my $alias(@{$c->{alias}}){
 		% next if $alias eq @{$c->{alias}}[0];
@@ -110,6 +110,7 @@
 		% }
 	% }
 	</div>
+	</fieldset>
 	<div id='fsubmit'>
   	<input type="submit" value="Save">
 	</div>
