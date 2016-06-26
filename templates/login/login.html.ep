@@ -17,14 +17,14 @@
 
 % layout $config->{theme};
 % title 'Login';
+<center>
 % if (my $msg = flash 'message') {
   <b class=error><%= $msg %></b><br>
 % }
-<form action="login" method="POST">
-	<fieldset id='login'>
-		<legend>Login Form:</legend>
+
+<form action="login" method="POST" id='loginForm'>
     <div id='banner'>
-Warning! This service is restricted to authorized users only. All activities on this system are logged.
+Warning! This system is restricted to authorized users only. All activities on this system are logged.
 Unauthorized access will be fully investigated and reported to the appropriate law enforcement agencies.
     </div>
 		<br>
@@ -37,5 +37,5 @@ Unauthorized access will be fully investigated and reported to the appropriate l
 			<br><br>
 			%= submit_button 'Log in', class => 'btn'
 		</div>
-	</fieldset>
 </form>
+</center>

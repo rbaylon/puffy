@@ -17,182 +17,237 @@
 
 % layout $config->{theme};
 % title $msg;  
-<%== $tags->{fieldset}->{open} %>
-	<%== $tags->{legend}->{open} %>
-		<%= $msg %>
-	<%== $tags->{legend}->{close} %>
-	<%== $tags->{pfform}->{open} %>
-		<%== $tags->{formtable}->{open} %>
-			<%== $tags->{formtr}->{open} %>
-				<%== $tags->{tdDesc}->{open} %>
+<fieldset class=fset>
+	<legend >
+		Firewall Rules
+	</legend>
+	<form id=pfRuleForm method=POST action=rules>
+		<table class=formtable>
+			<tr class=formtr>
+				<td class=tdDesc>
 					<%= label_for action => 'Action' %>
-				<%== $tags->{tdDesc}->{close} %>
-				<%== $tags->{formtd}->{open} %>
+				</td>
+				<td class=formtd>
 					<select id='action' name='action'>
 						% for my $a(@{$pf->{actions}}) {
 							<option value="<%= $a %>"
 							><%= $a %></option>
 						% }
 					</select>
-				<%== $tags->{formtd}->{close} %>
-			<%== $tags->{formtr}->{close} %>
-      <%== $tags->{formtr}->{open} %>
-        <%== $tags->{tdDesc}->{open} %>
+				</td>
+			</tr>
+      <tr class=formtr>
+        <td class=tdDesc>
           <%= label_for direction => 'Direction' %>
-        <%== $tags->{tdDesc}->{close} %>
-        <%== $tags->{formtd}->{open} %>
+        </td>
+        <td class=formtd>
           <select id='direction' name='direction'>
-          % for my $d(@{$pf->{direction}}) {
-            <option value="<%= $d %>"
-            ><%= $d %></option>
-          % }
+			% for my $d(@{$pf->{direction}}) {
+				<option value="<%= $d %>"
+				><%= $d %></option>
+			% }
           </select>
-        <%== $tags->{formtd}->{close} %>
-      <%== $tags->{formtr}->{close} %>
-      <%== $tags->{formtr}->{open} %>
-        <%== $tags->{tdDesc}->{open} %>
+        </td>
+      </tr>
+      <tr class=formtr>
+        <td class=tdDesc>
             <%= label_for log => 'Log' %>
-        <%== $tags->{tdDesc}->{close} %>
-        <%== $tags->{formtd}->{open} %>
+        </td>
+        <td class=formtd>
             <%= check_box log => 1, checked => undef, id => 'log' %>
-        <%== $tags->{formtd}->{close} %>
-      <%== $tags->{formtr}->{close} %>
-      <%== $tags->{formtr}->{open} %>
-        <%== $tags->{tdDesc}->{open} %>
+        </td>
+      </tr>
+      <tr class=formtr>
+        <td class=tdDesc>
             <%= label_for quick => 'Quick' %>
-        <%== $tags->{tdDesc}->{close} %>
-        <%== $tags->{formtd}->{open} %>
-            %= check_box quick => 1, checked => undef, id => 'quick'
-        <%== $tags->{formtd}->{close} %>
-      <%== $tags->{formtr}->{close} %>
-      <%== $tags->{formtr}->{open} %>
-        <%== $tags->{tdDesc}->{open} %>
+        </td>
+        <td class=formtd>
+            <%= check_box quick => 1, checked => undef, id => 'quick' %>
+        </td>
+      </tr>
+      <tr class=formtr>
+        <td class=tdDesc>
           <%= label_for ifsrdomain => 'Interface or rdomain' %>
-        <%== $tags->{tdDesc}->{close} %>
-        <%== $tags->{formtd}->{open} %>
+        </td>
+        <td class=formtd>
           <select id='ifsrdomain' name='ifsrdomain'>
-          % for my $if(@{$pf->{ifs}}) {
-            <option value="<%= $if %>"
-            ><%= $if %></option>
-          % }
+			% for my $if(@{$pf->{ifs}}) {
+				<option value="<%= $if %>"
+				><%= $if %></option>
+			% }
           </select>
-        <%== $tags->{formtd}->{close} %>
-      <%== $tags->{formtr}->{close} %>
-      <%== $tags->{formtr}->{open} %>
-        <%== $tags->{tdDesc}->{open} %>
+        </td>
+      </tr>
+      <tr class=formtr>
+        <td class=tdDesc>
           <%= label_for af => 'Address Family' %>
-        <%== $tags->{formtd}->{close} %>
-        <%== $tags->{formtd}->{open} %>
+        </td>
+        <td class=formtd>
           <select id='af' name='af'>
-          % for my $af(@{$pf->{af}}) {
-            <option value="<%= $af %>"
-            ><%= $af %></option>
-          % }
+			% for my $af(@{$pf->{af}}) {
+				<option value="<%= $af %>"
+				><%= $af %></option>
+			% }
           </select>
-        <%== $tags->{formtd}->{close} %>
-      <%== $tags->{formtr}->{close} %>
-      <%== $tags->{formtr}->{open} %>
-        <%== $tags->{tdDesc}->{open} %>
+        </td>
+      </tr>
+      <tr class=formtr>
+        <td class=tdDesc>
           <%= label_for protos => 'Protocol' %>
-        <%== $tags->{tdDesc}->{close} %>
-        <%== $tags->{formtd}->{open} %>
+        </td>
+        <td class=formtd>
           <select id='protos' name='protos'>
-          % for my $proto(@{$pf->{protos}}) {
-            <option value="<%= $proto %>"
-            ><%= $proto %></option>
-          % }
+			% for my $proto(@{$pf->{protos}}) {
+				<option value="<%= $proto %>"
+				><%= $proto %></option>
+			% }
           </select>
-        <%== $tags->{formtd}->{close} %>
-      <%== $tags->{formtr}->{close} %>
-      <%== $tags->{formtr}->{open} %>
-        <%== $tags->{tdDesc}->{open} %>
+        </td>
+      </tr>
+      <tr class=formtr>
+        <td class=tdDesc>
           <%= label_for src => 'Source' %>
-        <%== $tags->{tdDesc}->{close} %>
-        <%== $tags->{formtd}->{open} %>
-            <%== $tags->{formtable}->{open} %>
-                <%== $tags->{formtr}->{open} %>
-                    <%== $tags->{tdDescSub}->{open} %>
-                        <%= label_for srctype => 'Type' %>
+        </td>
+        <td class=formtd>
+            <table class=formsubtable>
+                <tr class=formtr>
+                    <td class=tdDescSub>
+                        <label for="srctype">Type</label>
                         <select id='srctype' name='srctype'>
                             % for my $srctype(@{$pf->{srctype}}) {
-                            <option value="<%= $srctype %>"
-                            ><%= $srctype %></option>
+								<option value="<%= $srctype %>"
+								><%= $srctype %></option>
                             % }
                         </select>
-                    <%== $tags->{tdDescSub}->{close} %>
-                    <%== $tags->{formtr}->{close} %>
-                    <%== $tags->{formtr}->{open} %>
-                    <%== $tags->{formtd}->{open} %>
+                    </td>
+                    </tr>
+                    <tr class=formtr>
+                    <td class=formtd>
                         <%= text_field 'src' => 'replace value from config' , id => 'src' %>
                     /
                         <select id='prefix' class='inputs' name='prefix'>
-                        % for my $j(1..128) {
-                            <option value="<%= $j %>"
-                            ><%= $j %></option>
-                        % }
+							% for my $j(1..128) {
+								<option value="<%= $j %>"
+								><%= $j %></option>
+							% }
                         </select>
-                    <%== $tags->{formtd}->{close} %>
-                <%== $tags->{formtr}->{close} %>
-				<%== $tags->{formtr}->{open} %>
-					<%== $tags->{tdDescSub}->{open} %>
+                    </td>
+                </tr>
+				<tr class=formtr>
+					<td class=tdDescSub>
 						<%= label_for srcport => 'Port' %>
 						<%= text_field 'srcport' , id => 'srcport', size => 12 %>
-					<%== $tags->{tdDescSub}->{close} %>
-				<%== $tags->{formtr}->{close} %>
-				<%== $tags->{formtr}->{open} %>
-					<%== $tags->{tdDescSub}->{open} %>
+					</td>
+				</tr>
+				<tr class=formtr>
+					<td class=tdDescSub>
 						<%= label_for srcos => 'OS' %>
                         <select id='srcos' class='inputs' name='srcos'>
-                        % for my $os(@{$pf->{os}}) {
-                            <option value="<%= $os %>"
-                            ><%= $os %></option>
-                        % }
+							% for my $os(@{$pf->{os}}) {
+								<option value="<%= $os %>"
+								><%= $os %></option>
+							% }
                         </select>
-					<%== $tags->{tdDescSub}->{close} %>
-				<%== $tags->{formtr}->{close} %>
-            <%== $tags->{formtable}->{close} %>
-        <%== $tags->{formtd}->{close} %>
-      <%== $tags->{formtr}->{close} %>
+					</td>
+				</tr>
+            </table>
+        </td>
+      </tr>
       
-      <%== $tags->{formtr}->{open} %>
-        <%== $tags->{tdDesc}->{open} %>
+      <tr class=formtr>
+        <td class=tdDesc>
           <%= label_for dst => 'Destination' %>
-        <%== $tags->{formtd}->{close} %>
-        <%== $tags->{formtd}->{open} %>
-            <%== $tags->{formtable}->{open} %>
-                <%== $tags->{formtr}->{open} %>
-                    <%== $tags->{tdDescSub}->{open} %>
-                        <%= label_for dsttype => 'Type' %>
+        </td>
+        <td class=formtd>
+            <table class=formsubtable>
+                <tr class=formtr>
+                    <td class=tdDescSub>
+						<%= label_for dsttype => 'Type' %>
                         <select id='dsttype' name='dsttype'>
                             % for my $dsttype(@{$pf->{dsttype}}) {
-                            <option value="<%= $dsttype %>"
-                            ><%= $dsttype %></option>
+								<option value="<%= $dsttype %>"
+								><%= $dsttype %></option>
                             % }
                         </select>
-                    <%== $tags->{tdDescSub}->{close} %>
-                    <%== $tags->{formtr}->{close} %>
-                    <%== $tags->{formtr}->{open} %>
-                    <%== $tags->{formtd}->{open} %>
-                        <%= text_field 'dst' => 'replace value from config' , id => 'dst' %>
+                    </td>
+                    </tr>
+                    <tr class=formtr>
+                    <td class=formtd>
+                         <%= text_field 'dst' => 'replace value from config' , id => 'dst' %>
                     /
                         <select id='prefix' class='inputs' name='prefix'>
-                        % for my $j(1..128) {
-                            <option value="<%= $j %>"
-                            ><%= $j %></option>
-                        % }
+							% for my $j(1..128) {
+								<option value="<%= $j %>"
+								><%= $j %></option>
+							% }
                         </select>
-                    <%== $tags->{formtd}->{close} %>
-                <%== $tags->{formtr}->{close} %>
-				<%== $tags->{formtr}->{open} %>
-					<%== $tags->{tdDescSub}->{open} %>
+                    </td>
+                </tr>
+				<tr class=formtr>
+					<td class=tdDescSub>
 						<%= label_for dstport => 'Port' %>
 						<%= text_field 'dstport' , id => 'dstport', size => 12 %>
-					<%== $tags->{tdDescSub}->{close} %>
-				<%== $tags->{formtr}->{close} %>
-            <%== $tags->{formtable}->{close} %>
-        <%== $tags->{formtd}->{close} %>
-      <%== $tags->{formtr}->{close} %>
-      
-		<%== $tags->{formtable}->{close} %>
-	<%== $tags->{pfform}->{close} %>
-<%== $tags->{fieldset}->{close} %>
+					</td>
+				</tr>
+            </table>
+        </td>
+      </tr>
+	  <tr class=formtr>
+		<td class=tdDesc>
+			<%= label_for filteropts => 'Filter Options' %>
+		</td>
+		<td class=formtd>
+            <table class=formsubtable>
+                <tr class=formtr>
+                    <td class=tdDescSub>
+						<%= label_for 'allow-opts' => 'Allow Options' %>
+					</td>
+					<td class=formtd>
+						<%= check_box 'allow-opts' => 1, checked => undef, id => 'allow-opts' %>
+					</td>
+				</tr>
+				<tr class=formtr>
+                    <td class=tdDescSub>
+						<%= label_for 'divert-reply' => 'Divert Reply' %>
+					</td>
+					<td class=formtd>
+						<%= check_box 'divert-reply' => 1, checked => undef, id => 'divert-reply' %>						
+					</td>
+				</tr>
+				<tr class=formtr>
+                    <td class=tdDescSub>
+						<%= label_for 'divert-packet' => 'Divert Packet to Port' %>
+					</td>
+					<td class=formtd>
+						<%= check_box 'divert-packet' => 1, checked => undef, id => 'divert-packet' %>
+						<%= label_for 'divert-port' => 'Port' %>
+						<%= text_field 'divert-port' , id => 'divert-port', size => 5 %>						
+					</td>
+				</tr>
+				<tr class=formtr>
+                    <td class=tdDescSub>
+						<%= label_for 'divert-to' => 'Divert Packet to local IP and Port' %>
+					</td>
+					<td class=formtd>
+						<%= check_box 'divert-to' => 1, checked => undef, id => 'divert-to' %>
+						<%= label_for 'divert-to-host' => 'Local IP' %>
+						<%= text_field 'divert-to-host' , id => 'divert-to-host' %>						
+						<%= label_for 'divert-to-port' => 'Port' %>
+						<%= text_field 'divert-to-port' , id => 'divert-to-port', size => 5 %>						
+					</td>
+				</tr>
+				<tr class=formtr>
+                    <td class=tdDescSub>
+						<%= label_for 'flags' => 'TCP Flags' %>
+					</td>
+					<td class=formtd>
+						<%= check_box 'flags' => 1, checked => undef, id => 'flags' %>
+						<%= text_field 'flagsInput' => 'S/SA' , id => 'flagsInput', size => 17 %>						
+					</td>
+				</tr>
+			</table>
+		</td>
+	  </tr>
+		</table>
+	</form>
+</fieldset>

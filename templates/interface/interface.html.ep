@@ -22,9 +22,9 @@
 	% if (my $localmsg = flash 'localmsg') {
 		<fieldset class='<%= flash 'mode' %>'><legend><%= flash 'mode' %></legend><%= $localmsg %></fieldset>
   % }
-	<fieldset>
-	<legend><h2><%= "$msg: $if" %></h2></legend>
-	<table>
+	<fieldset class=fset>
+	<legend><%= "$msg: $if" %></legend>
+	<table class=formtable>
     <tr>
       <td class=tdDesc ><%= label_for config_type => 'Configuration' %></td>
       <td>
